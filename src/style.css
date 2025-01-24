@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Noto+Sans+TC&family=Noto+Sans&display=swap');
+
+:root {
+  font-family: -apple-system, "Noto Sans TC", "Noto Sans JP", "Noto Sans", "Segoe UI", "Microsoft YaHei", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+.game-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.game-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(20px);
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: white;
+  padding: 1rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.song-icon {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.stanza-number {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.moov-text {
+  font-size: 1rem;
+  margin-top: 2rem;
+  color: white;
+}
+
+.lyrics-container {
+  background-color: rgba(50, 50, 50, 0.5);
+  border-radius: 15px;
+  padding: 1rem;
+  margin: 0 0.5rem;
+}
+
+.lyrics {
+  font-size: 1.2rem;
+  margin: 0 auto;
+}
+
+.line {
+  margin: 0.5rem 0;
+}
+
+.phrase {
+  margin: 0 0.5rem;
+}
+
+.input-container {
+  display: inline-block;
+  position: relative;
+}
+
+.answer-input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid white;
+  color: white;
+  font-size: 1.2rem;
+  padding: 0.25rem;
+  margin: 0 0.5rem;
+  width: 150px;
+  text-align: center;
+  transition: border-color 0.3s ease;
+}
+
+.answer-input.incorrect {
+  border-bottom-color: #ff4444;
+}
+
+.answer-input.correct {
+  border-bottom-color: #44ff44;
+}
+
+.feedback-message {
+  position: absolute;
+  font-size: 0.9rem;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  margin-left: 10px;
+}
+
+.incorrect-message {
+  color: #ff4444;
+}
+
+.correct-message {
+  color: #44ff44;
+}
+
+.answer-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.answer-input:focus {
+  outline: none;
+  border-bottom-color: #42b883;
+}
+
+.skip-button {
+  margin-top: 2rem;
+  padding: 0.5rem 2rem;
+  font-size: 1.1rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid white;
+  color: white;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.skip-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.skip-button:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 480px) {
+  .feedback-message {
+    position: static;
+    margin-top: 0.5rem;
+    margin-left: 0;
+    display: block;
+  }
+  
+  .lyrics-container {
+    padding: 0.75rem;
+  }
+  
+  .skip-button {
+    margin-top: 1rem;
+    padding: 0.5rem 1.5rem;
+  }
+}
