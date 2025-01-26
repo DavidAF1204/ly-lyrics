@@ -57,12 +57,6 @@ body {
   color: white;
 }
 
-.moov-text {
-  font-size: 1rem;
-  margin-top: 2rem;
-  color: white;
-}
-
 .lyrics-container {
   background-color: rgba(50, 50, 50, 0.5);
   border-radius: 15px;
@@ -101,22 +95,24 @@ body {
   transition: border-color 0.3s ease;
 }
 
-.answer-input.incorrect {
-  border-bottom-color: #ff4444;
+.answer-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
 }
 
-.answer-input.correct {
-  border-bottom-color: #44ff44;
+.answer-input:focus {
+  outline: none;
+  border-bottom-color: #42b883;
+}
+
+.feedback-container {
+  margin-top: 1rem;
+  min-height: 1.5rem;
+  text-align: center;
 }
 
 .feedback-message {
-  position: absolute;
-  font-size: 0.9rem;
-  left: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-  white-space: nowrap;
-  margin-left: 10px;
+  font-size: 1rem;
+  display: inline-block;
 }
 
 .incorrect-message {
@@ -127,17 +123,20 @@ body {
   color: #44ff44;
 }
 
-.answer-input::placeholder {
-  color: rgba(255, 255, 255, 0.7);
+.moov-text {
+  font-size: 1rem;
+  color: white;
 }
 
-.answer-input:focus {
-  outline: none;
-  border-bottom-color: #42b883;
-}
-
-.skip-button {
+.button-container {
   margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.show-answer-button,
+.skip-button {
   padding: 0.5rem 2rem;
   font-size: 1.1rem;
   background-color: rgba(255, 255, 255, 0.2);
@@ -148,28 +147,36 @@ body {
   transition: all 0.3s ease;
 }
 
+.show-answer-button:hover,
 .skip-button:hover {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
+.show-answer-button:active,
 .skip-button:active {
   transform: scale(0.98);
 }
 
+.revealed-answer {
+  color: #44ff44;
+  font-weight: bold;
+  margin: 0 0.5rem;
+}
+
 @media (max-width: 480px) {
-  .feedback-message {
-    position: static;
-    margin-top: 0.5rem;
-    margin-left: 0;
-    display: block;
-  }
-  
   .lyrics-container {
     padding: 0.75rem;
   }
   
-  .skip-button {
+  .button-container {
     margin-top: 1rem;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .show-answer-button,
+  .skip-button {
+    width: 200px;
     padding: 0.5rem 1.5rem;
   }
 }

@@ -9,7 +9,7 @@
             <div class="line">
               <template v-for="(phrase, phraseIndex) in splitLine(line)" :key="`${lineIndex}-${phraseIndex}`">
                 <span v-if="lineIndex === missingLineIndex && phraseIndex === missingPhraseIndex">
-                  <div class="input-container">
+                  <div v-if="!showAnswer" class="input-container">
                     <input 
                       v-model="userInput"
                       @keyup.enter="checkAnswer"
@@ -17,9 +17,8 @@
                       :class="{ 'incorrect': showIncorrect, 'correct': showCorrect }"
                       placeholder="輸入歌詞"
                     />
-                    <div v-if="showIncorrect" class="feedback-message incorrect-message">錯誤</div>
-                    <div v-if="showCorrect" class="feedback-message correct-message">正確</div>
                   </div>
+                  <span v-else class="revealed-answer">{{ correctPhrase }}</span>
                 </span>
                 <span v-else class="phrase">{{ phrase }}</span>
               </template>
@@ -27,8 +26,15 @@
           </template>
         </div>
       </div>
-      <div class="moov-text">歌詞參照於MOOV平台</div>
-      <button @click="selectRandomStanza" class="skip-button">Skip</button>
+      <div class="feedback-container">
+        <div v-if="showIncorrect" class="feedback-message incorrect-message">錯誤</div>
+        <div v-if="showCorrect" class="feedback-message correct-message">正確</div>
+      </div>
+      <div class="moov-text">歌詞取自MOOV平台</div>
+      <div class="button-container">
+        <button @click="showCorrectAnswer" class="show-answer-button">顯示答案</button>
+        <button @click="selectRandomStanza" class="skip-button">跳過</button>
+      </div>
     </div>
   </div>
 </template>
@@ -40,12 +46,16 @@ const lyrics = ref({})
 const icons = ref({})
 const currentSong = ref('')
 const currentStanza = ref([])
+const currentStanzaNumber = ref(1)
 const userInput = ref('')
 const missingLineIndex = ref(0)
 const missingPhraseIndex = ref(0)
 const showIncorrect = ref(false)
 const showCorrect = ref(false)
-const currentStanzaNumber = ref(1)
+const showAnswer = ref(false)
+const correctPhrase = computed(() => 
+  splitLine(currentStanza.value[missingLineIndex.value])[missingPhraseIndex.value]
+)
 
 const backgroundStyle = computed(() => ({
   backgroundImage: `url(${currentIcon.value})`,
@@ -94,6 +104,7 @@ async function loadResources() {
 }
 
 function selectRandomStanza() {
+  showAnswer.value = false
   showIncorrect.value = false
   showCorrect.value = false
   const songNames = Object.keys(lyrics.value)
@@ -165,6 +176,14 @@ function checkAnswer() {
       showIncorrect.value = false
     }, 1000)
   }
+}
+
+function showCorrectAnswer() {
+  showAnswer.value = true
+  setTimeout(() => {
+    showAnswer.value = false
+    selectRandomStanza()
+  }, 2000)
 }
 
 onMounted(async () => {

@@ -1,6 +1,6 @@
 # LY Lyrics
 
-A web application built with Vue.js and Vite for training lyrics memorization. Users practice by filling in missing phrases from song lyrics, with an immersive interface featuring song artworks.
+A website built with Vue.js and Vite for training lyrics memorization. Users practice by filling in missing phrases from song lyrics, with an interface featuring song artworks.
 
 ## Website
 Visit [www.ly-lyrics.com](https://www.ly-lyrics.com)
@@ -35,4 +35,4 @@ npm run build
 ```
 
 ## Screenshot
-![LY Lyrics Screenshot](https://i.imgur.com/2i0iMVP.png)
+![LY Lyrics Screenshot](https://i.imgur.com/J5Y7YeZ.png)
