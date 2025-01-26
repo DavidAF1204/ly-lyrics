@@ -1,0 +1,5 @@
+In all .txt files in the lyrics directory,
+1. If a stanza only has a single phrase with (), it may be moved up to the last stanza
+2. All spaces in English phrases are replaced with -
+3. All the following symbols are deleted if they are not inside a ():
+~ ～ . … ⋯ 「」 「」 ! ！ ? ？
