@@ -66,7 +66,9 @@ const currentIcon = computed(() => {
 })
 
 function splitLine(line) {
-  return line.trim().split(' ').filter(phrase => phrase.length > 0)
+  return line.trim().split(' ')
+    .filter(phrase => phrase.length > 0)
+    .map(phrase => phrase.replace(/-/g, ' '))
 }
 
 function hasNonParentheticalPhrase(line) {
@@ -161,8 +163,10 @@ function selectRandomStanza() {
 
 function checkAnswer() {
   const correctPhrase = splitLine(currentStanza.value[missingLineIndex.value])[missingPhraseIndex.value]
+  const normalizedInput = userInput.value.trim().toLowerCase()
+  const normalizedCorrect = correctPhrase.toLowerCase()
   
-  if (userInput.value.trim().toLowerCase() === correctPhrase.toLowerCase()) {
+  if (normalizedInput === normalizedCorrect) {
     showIncorrect.value = false
     showCorrect.value = true
     setTimeout(() => {
