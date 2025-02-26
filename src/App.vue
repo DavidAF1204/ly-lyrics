@@ -1,5 +1,9 @@
 <template>
-  <div class="game-container" :style="backgroundStyle">
+  <div v-if="isLoading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">載入中...</div>
+  </div>
+  <div v-else class="game-container" :style="backgroundStyle">
     <div class="content">
       <img :src="currentIcon" class="song-icon" alt="Song icon" />
       <div class="stanza-number">第{{ currentStanzaNumber }}節</div>
@@ -53,6 +57,7 @@ const missingPhraseIndex = ref(0)
 const showIncorrect = ref(false)
 const showCorrect = ref(false)
 const showAnswer = ref(false)
+const isLoading = ref(true)
 const correctPhrase = computed(() => 
   splitLine(currentStanza.value[missingLineIndex.value])[missingPhraseIndex.value]
 )
@@ -103,6 +108,9 @@ async function loadResources() {
     const songName = path.split('/').pop().replace('.jpg', '')
     icons.value[songName] = path.replace('/public', '')
   }
+
+  // Set loading to false when resources are loaded
+  isLoading.value = false
 }
 
 function selectRandomStanza() {
